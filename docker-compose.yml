@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  springboot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:8080"
+    volumes:
+      - .:/app  # Monta o diretório atual no contêiner
+    environment:
+      SPRING_PROFILES_ACTIVE: "dev"
+    networks:
+      - springboot-network
+
+networks:
+  springboot-network:
+    driver: bridge
