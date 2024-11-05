@@ -1,29 +1,30 @@
-# Usar uma imagem base do Maven com OpenJDK
-FROM maven:3.8.5-openjdk-17-slim AS build
+# Etapa 1: Usar uma imagem com Maven e JDK 17 (para construir a aplicação)
+FROM maven:latest AS build
 
-# Definir o diretório de trabalho
+# Definir diretório de trabalho no contêiner
 WORKDIR /app
 
-# Copiar o arquivo pom.xml e baixar as dependências
+# Copiar o arquivo pom.xml e a pasta src
 COPY pom.xml .
-
-# Copiar os arquivos do código fonte
 COPY src ./src
 
-# Executar o Maven para construir a aplicação
+# Rodar o Maven para compilar e empacotar a aplicação
 RUN mvn clean package -DskipTests
 
-# Usar uma imagem base do OpenJDK para a aplicação
-FROM openjdk:17-jdk-slim
+# Verificar o conteúdo do diretório target (listar os arquivos gerados)
+RUN ls -l /app/target/
 
-# Definir o diretório de trabalho
+# Etapa 2: Usar uma imagem mais enxuta para rodar a aplicação (com JRE 17)
+FROM openjdk:17-slim
+
+# Definir diretório de trabalho
 WORKDIR /app
 
-# Copiar o JAR gerado da etapa de build
-COPY --from=build /app/target/*.jar app.jar
+# Copiar o JAR gerado pela etapa anterior para o contêiner
+COPY --from=build /app/target/*.jar /app/app.jar
 
-# Expor a porta que a aplicação Spring Boot usará
+# Expor a porta 8080 (porta padrão do Spring Boot)
 EXPOSE 8080
 
-# Comando para rodar a aplicação
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Comando para rodar a aplicação Spring Boot
+CMD ["java", "-jar", "/app/app.jar"]
