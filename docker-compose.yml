@@ -1,9 +1,15 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  springboot-app:
-    build: .
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /app
+    container_name: ac2-api
+    restart: on-failure
     ports:
-      - "9000:8080"
+      - 9000:8080
     volumes:
-      - .:/app
+      - ./:/app
+    
