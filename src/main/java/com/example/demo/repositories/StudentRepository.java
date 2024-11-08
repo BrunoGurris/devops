@@ -1,11 +1,11 @@
 package com.example.demo.repositories;
 
-import org.springframework.stereotype.Service;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@Service
-public class StudentRepository {
+import com.example.demo.entities.Student;
 
-    public String getAll() {
-        return "Hello, World22233344445555!";
-    }
+@Repository
+public interface StudentRepository extends JpaRepository<Student, Long> {
+    
 }
