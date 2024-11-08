@@ -3,6 +3,7 @@ package com.example.demo.services;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class StudentService {
         return studentRepository.findAll().stream().map(user -> {
             return new StudentDTO(user);
         }).collect(Collectors.toList());
+    }
+
+    public Student getStudentById(Long id) {
+        Optional<Student> studenOptional = studentRepository.findById(id);
+        return studenOptional.orElseThrow(() -> new RuntimeException("Estudante não encontrado!")); 
     }
 
     public Student create(StudentCreateDTO studentDTO) {

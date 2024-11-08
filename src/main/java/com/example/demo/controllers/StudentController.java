@@ -19,6 +19,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
@@ -32,6 +33,13 @@ public class StudentController {
     public ResponseEntity<List<StudentDTO>> getAllStudents() {
         List<StudentDTO> students = studentService.getAllStudents();
         return new ResponseEntity<>(students, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
+        StudentDTO student = new StudentDTO(studentService.getStudentById(id));
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
     
 
