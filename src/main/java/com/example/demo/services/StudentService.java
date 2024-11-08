@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.example.demo.dtos.students.StudentCreateDTO;
 import com.example.demo.dtos.students.StudentDTO;
@@ -33,5 +35,10 @@ public class StudentService {
     public Student create(StudentCreateDTO studentDTO) {
         Student student = new Student(studentDTO);
         return studentRepository.save(student);
+    }
+
+    public ResponseEntity<?> deleteStudentById(Long id) {
+        studentRepository.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK).build(); 
     }
 }
