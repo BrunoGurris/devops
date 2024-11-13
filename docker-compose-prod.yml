@@ -1,0 +1,14 @@
+version: "3.8"
+
+# docker-compose -f docker-compose-prod.yml up -d --build
+services:
+  api-prod:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /app
+    container_name: ac2-api-prod
+    ports:
+      - 6002:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
