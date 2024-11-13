@@ -1,14 +1,12 @@
 version: "3.8"
 
 services:
-  app:
+  api:
     build:
       context: ./
       dockerfile: Dockerfile
     working_dir: /app
     container_name: ac2-api
     ports:
-      - 9000:8080
-    volumes:
-      - ./:/app
+      - 6000:8080
     

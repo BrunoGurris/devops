@@ -33,6 +33,11 @@ public class StudentTest {
 
     @Test
     public void testFindAllStudents() {
+        Student student = new Student();
+        student.setName("Teste");
+        student.setEmail(new StudentEmail("9VX2F@example.com"));
+        studentRepository.save(student);
+
         List<Student> students = studentRepository.findAll();
         assertTrue(students.size() >= 1, "Deve haver um ou mais estudantes na lista!");
     }
