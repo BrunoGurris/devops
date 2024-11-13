@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Compile e empacote a aplicação Spring Boot em um JAR
-RUN mvn clean package -DskipTests
+RUN mvn clean install -DskipTests
 
 # Etapa 2: Usar uma imagem mais enxuta para rodar a aplicação (sem o Maven)
 FROM openjdk:17-jdk-alpine

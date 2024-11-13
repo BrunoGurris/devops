@@ -1,14 +1,15 @@
 pipeline {
   agent any
   stages {
-    stage('Prune Docker data') {
+    stage('Clean Docker') {
       steps {
         sh 'docker system prune -a --volumes -f'
       }
     }
-    stage('Start container') {
+
+    stage('Start Docker') {
       steps {
-        sh 'docker compose -f docker-compose-staging.yml up -d --build'
+        sh 'docker compose -f docker-compose-prod.yml up -d --build'
       }
     }
   }
