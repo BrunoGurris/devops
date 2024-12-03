@@ -34,8 +34,8 @@ public class StudentTest {
     @Test
     public void testFindAllStudents() {
         Student student = new Student();
-        student.setName("Teste");
-        student.setEmail(new StudentEmail("9VX2F@example.com"));
+        student.setName("Teste2");
+        student.setEmail(new StudentEmail("9VX2F2@example.com"));
         studentRepository.save(student);
 
         List<Student> students = studentRepository.findAll();

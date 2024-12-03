@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import com.example.demo.dtos.students.StudentCreateDTO;
 
+import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,9 +29,11 @@ public class Student {
     private StudentEmail email;
 
     @CreatedDate
+    @Nullable
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Nullable
     private LocalDateTime updatedAt;
 
     public Student() {}
